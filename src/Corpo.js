@@ -1,11 +1,39 @@
+import { useState } from "react";
 import styled from "styled-components";
 import logo from "../src/assets/img/logo.png";
 import play from "../src/assets/img/seta_play.png"
 import Footer from "../src/Footer"
+import { Questoes } from "./Questoes";
 
+
+const perguntas = [
+  {numero: " 1" },
+  {numero: " 2" },
+  {numero: " 3" },
+  {numero: " 4" },
+  {numero: " 5" },
+  {numero: " 6" },
+  {numero: " 7" },
+  {numero: " 8" },
+];
+
+
+
+function Perguntas (props) {
+  const {numero, imagem} = props
+  const [pergunta, setPergunta] = useState(true)
+  console.log(numero)
+
+
+  return (
+    <PerguntaFechada ><h1>Pergunta{numero}</h1> <img src = {imagem} alt = "play"/> </PerguntaFechada>
+  )
+}
 
 
 export default function Corpo() {
+  
+
   return (
     <>
       <Conteiner>
@@ -13,22 +41,7 @@ export default function Corpo() {
           <img src={logo} alt="logo" />
           <h1>ZapRecall</h1>
         </LogoConteiner>
-        <PerguntaFechada>
-            <p>Pergunta 1</p>
-            <img src={play} alt = "play" />
-        </PerguntaFechada>
-        <PerguntaFechada>
-            <p>Pergunta 2</p>
-            <img src={play} alt = "play" />
-        </PerguntaFechada>
-        <PerguntaFechada>
-            <p>Pergunta 3</p>
-            <img src={play} alt = "play" />
-        </PerguntaFechada>
-        <PerguntaFechada>
-            <p>Pergunta 4</p>
-            <img src={play} alt = "play" />
-        </PerguntaFechada>
+        {perguntas.map((p, index) => <Perguntas numero = {p.numero} imagem = {play} key = {index}/>)}
 
         
       </Conteiner>
