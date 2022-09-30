@@ -14,11 +14,6 @@ export default function Footer() {
   return (
 <>  
     <FooterC>
-    <ContainerBotoes>
-        <Botao nome = "Não lembrei" cor = "#FF3030"/>
-        <Botao nome = "Quase não lembrei" cor = "#FF922E"/>
-        <Botao nome = "Zap!" cor = "#2FBE34"/>
-    </ContainerBotoes>
     <p>0/8 CONCLUÍDOS</p>
     </FooterC>
 
