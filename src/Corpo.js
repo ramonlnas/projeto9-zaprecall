@@ -5,6 +5,9 @@ import seta from "../src/assets/img/seta_virar.png";
 import play from "../src/assets/img/seta_play.png";
 import Footer from "../src/Footer";
 import { questoes } from "./questoes";
+import erro from "../src/assets/img/icone_erro.png"
+import almost from "../src/assets/img/icone_quase.png"
+import certo from "../src/assets/img/icone_certo.png"
 
 const perguntas = [
   { numero: " 1" },
@@ -21,7 +24,12 @@ function Perguntas(props) {
   const { numero, imagem } = props;
   const [pergunta, setPergunta] = useState(true);
   const [resposta, setResposta] = useState(true);
-  console.log(numero);
+  const [cor, setCor] = useState("");
+  const [image, setImage] = useState(imagem)
+  const [riscado, setRiscado] = useState("");
+
+  console.log(resposta, pergunta);
+
   function viraPergunta() {
     setPergunta(false);
   }
@@ -30,9 +38,31 @@ function Perguntas(props) {
     setResposta(false);
   }
 
+  function voltaPergunta() {
+    setPergunta(true)
+  }
+
+  function vermelho () {
+    setCor("#FF3030")
+    setRiscado("line-through")
+    setImage(erro)
+  }
+  function amarelo () {
+    setCor("#FF922E")
+    setRiscado("line-through")
+    setImage(almost)
+
+  }
+  function verde () {
+    setCor("#2FBE34")
+    setRiscado("line-through")
+    setImage(certo)
+
+  }
+
   return pergunta === true ? (
-    <PerguntaFechada onClick={() => viraPergunta({ numero })}>
-      <h1>Pergunta{numero}</h1> <img src={imagem} alt="play" />
+    <PerguntaFechada style={{ color: `${cor}`, textDecoration: `${riscado}` }} onClick={() => viraPergunta({ numero })}>
+      <h1>Pergunta{numero}</h1> <img src={image} alt="play" />
     </PerguntaFechada>
   ) : resposta === true ? (
     <PerguntaAberta onClick={() => virarResposta({ numero })}>
@@ -42,11 +72,11 @@ function Perguntas(props) {
     <PerguntaAberta>
       <p>{questoes[numero - 1].R}</p>
       <ContainerBotoes>
-        <button style={{ backgroundColor: "#FF3030" }}>Não lembrei</button>
-        <button style={{ backgroundColor: "#FF922E" }}>
+        <button onClick={() => voltaPergunta(vermelho())} style={{ backgroundColor: "#FF3030" }}>Não lembrei</button>
+        <button onClick={() => voltaPergunta(amarelo())} style={{ backgroundColor: "#FF922E" }}>
           Quase não lembrei
         </button>
-        <button style={{ backgroundColor: "#2FBE34" }}>Zap!</button>
+        <button onClick={() => voltaPergunta(verde())} style={{ backgroundColor: "#2FBE34" }}>Zap!</button>
       </ContainerBotoes>
     </PerguntaAberta>
   );
@@ -99,7 +129,7 @@ const LogoConteiner = styled.div`
   }
 `;
 
-const PerguntaFechada = styled.button`
+const PerguntaFechada = styled.div`
   width: 300px;
   height: 35px;
   background-color: #ffffff;
@@ -124,7 +154,7 @@ const PerguntaFechada = styled.button`
     height: 23px;
   }
 `;
-const PerguntaAberta = styled.button`
+const PerguntaAberta = styled.div`
   width: 300px;
   margin: 12px;
   padding: 15px;
@@ -158,7 +188,7 @@ const ContainerBotoes = styled.div`
   margin: 20px;
 
   button {
-    width: 90px;
+    width: 85px;
     font-family: "Recursive";
     font-style: normal;
     font-weight: 400;
