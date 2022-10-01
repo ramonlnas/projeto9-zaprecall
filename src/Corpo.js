@@ -21,12 +21,14 @@ const perguntas = [
 ];
 
 function Perguntas(props) {
-  const { numero, imagem } = props;
+  const { numero, imagem, contador, setContador } = props;
   const [pergunta, setPergunta] = useState(true);
   const [resposta, setResposta] = useState(true);
   const [cor, setCor] = useState("");
   const [image, setImage] = useState(imagem)
   const [riscado, setRiscado] = useState("");
+  
+  
 
   console.log(resposta, pergunta);
 
@@ -43,17 +45,20 @@ function Perguntas(props) {
   }
 
   function vermelho () {
+    setContador(contador + 1)
     setCor("#FF3030")
     setRiscado("line-through")
     setImage(erro)
   }
   function amarelo () {
+    setContador(contador + 1)
     setCor("#FF922E")
     setRiscado("line-through")
     setImage(almost)
 
   }
   function verde () {
+    setContador(contador + 1)
     setCor("#2FBE34")
     setRiscado("line-through")
     setImage(certo)
@@ -83,6 +88,7 @@ function Perguntas(props) {
 }
 
 export default function Corpo() {
+  const [contador, setContador] = useState(0)
   return (
     <>
       <Conteiner>
@@ -91,10 +97,10 @@ export default function Corpo() {
           <h1>ZapRecall</h1>
         </LogoConteiner>
         {perguntas.map((p, index) => (
-          <Perguntas numero={p.numero} imagem={play} key={index} />
+          <Perguntas contador={contador} setContador = {setContador} numero={p.numero} imagem={play} key={index} />
         ))}
       </Conteiner>
-      <Footer />
+      <Footer contador = {contador} setContador={setContador} />
     </>
   );
 }

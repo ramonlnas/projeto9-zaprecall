@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 
-export default function Footer() {
-  
+export default function Footer(props) {
+  const {contador, setContador} = props
 
   return (
 <>  
     <FooterC>
-    <p>0/8 CONCLUÍDOS</p>
+    <p>{contador}/8 CONCLUÍDOS</p>
     </FooterC>
 
     
