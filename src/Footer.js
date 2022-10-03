@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 export default function Footer(props) {
-  const {contador, setContador} = props
+  const {contador} = props
 
   return (
 <>  

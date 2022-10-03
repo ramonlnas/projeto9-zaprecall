@@ -26,6 +26,7 @@ function Perguntas(props) {
   const [resposta, setResposta] = useState(true);
   const [cor, setCor] = useState("");
   const [image, setImage] = useState(imagem)
+
   const [riscado, setRiscado] = useState("");
   
   
@@ -67,11 +68,11 @@ function Perguntas(props) {
 
   return pergunta === true ? (
     <PerguntaFechada style={{ color: `${cor}`, textDecoration: `${riscado}` }} onClick={() => viraPergunta({ numero })}>
-      <h1>Pergunta{numero}</h1> <img src={image} alt="play" />
+      <p>Pergunta{numero}</p> <img src={image} alt="play" />
     </PerguntaFechada>
   ) : resposta === true ? (
-    <PerguntaAberta onClick={() => virarResposta({ numero })}>
-      <p>{questoes[numero - 1].Q}</p> <img src={seta} alt="seta" />
+    <PerguntaAberta >
+      <p>{questoes[numero - 1].Q}</p> <img onClick={() => virarResposta({ numero })} src={seta} alt="seta" />
     </PerguntaAberta>
   ) : (
     <PerguntaAberta>
@@ -137,7 +138,7 @@ const LogoConteiner = styled.div`
 
 const PerguntaFechada = styled.div`
   width: 300px;
-  height: 35px;
+  height: 65px;
   background-color: #ffffff;
   margin: 12px;
   padding: 15px;
@@ -153,7 +154,6 @@ const PerguntaFechada = styled.div`
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
-    color: #333333;
   }
   img {
     width: 20px;
